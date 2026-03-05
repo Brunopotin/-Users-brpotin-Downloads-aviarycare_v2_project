@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,8 @@
 <style>
 
 body{
-font-family:Arial, sans-serif;
-background:#f5f5f5;
+font-family: Arial, sans-serif;
+background:#f4f4f4;
 margin:0;
 padding:0;
 }
@@ -28,15 +29,6 @@ margin:0;
 font-size:26px;
 }
 
-.badge{
-background:#c9a227;
-padding:4px 10px;
-border-radius:10px;
-font-size:12px;
-display:inline-block;
-margin-top:5px;
-}
-
 .container{
 padding:15px;
 max-width:500px;
@@ -44,26 +36,20 @@ margin:auto;
 }
 
 .card{
-background:white;
 padding:12px;
-margin-bottom:10px;
 border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+margin-bottom:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
-.card.blue{
-background:#dff3f7;
-}
-
-.card.red{
+.red{
 background:#fde5e5;
 }
 
-.tache{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
+.blue{
+background:#dff3f7;
 }
 
 .btn-fait{
@@ -80,116 +66,52 @@ cursor:pointer;
 background:#3e9142;
 }
 
-.compteur{
-font-size:14px;
-margin:10px 0;
-color:#555;
-}
-.btn-fait{
-background:#4CAF50;
-border:none;
-color:white;
-padding:4px 10px;
-border-radius:8px;
-font-size:12px;
-cursor:pointer;
-margin-left:10px;
-}
-
-.tache{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
 </style>
 </head>
-
 
 <body>
 
 <div class="header">
 <h1>AviaryCare</h1>
-<div class="badge">Tâches : <span id="badgeTaches">0</span></div>
+<p>Gestion d’élevage d’oiseaux</p>
 </div>
-
 
 <div class="container">
 
-<div class="card red tache" data-id="t1">
+<div class="card red">
 <span>🪶 Baguage aujourd’hui — Oisillon</span>
 <button class="btn-fait" onclick="marquerFait(this)">Fait</button>
 </div>
 
-<div class="card red tache" data-id="t2">
+<div class="card red">
 <span>🪶 Baguage demain — Oisillon</span>
 <button class="btn-fait" onclick="marquerFait(this)">Fait</button>
 </div>
 
-<div class="card blue tache" data-id="t3">
-<span>🌿 Graines et pâtée simple — Eau claire</span>
+<div class="card blue">
+<span>🌿 Graines et pâtée simple — Eau claire à administrer</span>
 <button class="btn-fait" onclick="marquerFait(this)">Fait</button>
 </div>
 
-<div class="card red tache" data-id="t4">
+<div class="card red">
 <span>🏠 Vérifier nid Cage A</span>
 <button class="btn-fait" onclick="marquerFait(this)">Fait</button>
 </div>
 
-<div class="card blue tache" data-id="t5">
+<div class="card blue">
 <span>⚖️ Pesée mensuelle</span>
 <button class="btn-fait" onclick="marquerFait(this)">Fait</button>
 </div>
 
 </div>
 
-
 <script>
 
 function marquerFait(btn){
-
-const tache = btn.parentElement
-const id = tache.dataset.id
-
-localStorage.setItem("fait_"+id,"oui")
-
-tache.style.display="none"
-
-mettreAJourCompteur()
-
+btn.parentElement.style.display="none"
 }
-
-
-function verifierTaches(){
-
-document.querySelectorAll(".tache").forEach(tache=>{
-
-const id = tache.dataset.id
-
-if(localStorage.getItem("fait_"+id)){
-tache.style.display="none"
-}
-
-})
-
-mettreAJourCompteur()
-
-}
-
-
-function mettreAJourCompteur(){
-
-const visibles = [...document.querySelectorAll(".tache")]
-.filter(t=>t.style.display!=="none").length
-
-document.getElementById("badgeTaches").textContent = visibles
-
-}
-
-
-document.addEventListener("DOMContentLoaded", verifierTaches)
 
 </script>
-
 
 </body>
 </html>
